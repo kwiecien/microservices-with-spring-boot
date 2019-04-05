@@ -26,24 +26,28 @@ public class CalculatorController {
     @GetMapping("/add")
     public String add(@RequestParam String o1, @RequestParam String o2) {
         logger.log(NAME, o1 + " + " + o2);
-        return Integer.toString(Integer.parseInt(o1, radix) + Integer.parseInt(o2, radix), radix);
+        return Integer.toString(parseInt(o1) + parseInt(o2), radix);
     }
 
     @GetMapping("/sub")
     public String subtract(@RequestParam String o1, @RequestParam String o2) {
         logger.log(NAME, o1 + " - " + o2);
-        return Integer.toString(Integer.parseInt(o1, radix) - Integer.parseInt(o2, radix), radix);
+        return Integer.toString(parseInt(o1) - parseInt(o2), radix);
     }
 
     @GetMapping("/mult")
     public String multiply(@RequestParam String o1, @RequestParam String o2) {
         logger.log(NAME, o1 + " * " + o2);
-        return Integer.toString(Integer.parseInt(o1, radix) * Integer.parseInt(o2, radix), radix);
+        return Integer.toString(parseInt(o1) * parseInt(o2), radix);
     }
 
     @GetMapping("/div")
     public String divide(@RequestParam String o1, @RequestParam String o2) {
         logger.log(NAME, o1 + " / " + o2);
-        return Integer.toString(Integer.parseInt(o1, radix) / Integer.parseInt(o2, radix), radix);
+        return Integer.toString(parseInt(o1) / parseInt(o2), radix);
+    }
+
+    private int parseInt(@RequestParam String o1) {
+        return Integer.parseInt(o1, radix);
     }
 }
