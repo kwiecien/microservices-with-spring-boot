@@ -1,4 +1,4 @@
-radix: 2
+#radix: 2
 
 server:
   port: 10000
@@ -9,6 +9,11 @@ server:
 spring:
   application:
     name: sub
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: config
 
 management:
   endpoints:
