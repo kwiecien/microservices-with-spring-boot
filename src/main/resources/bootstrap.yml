@@ -27,3 +27,9 @@ eureka:
     serviceUrl:
       defaultZone: http://191.168.101.23:8761/eureka
 
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 10000
+        readTimeout: 10000
