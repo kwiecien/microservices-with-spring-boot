@@ -1,0 +1,29 @@
+server:
+  port: 10000
+#  address: 191.168.101.23
+#  address: 192.168.176.79
+  address: 191.168.101.234
+
+spring:
+  application:
+    name: sub
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  server:
+    port: 11000
+
+eureka:
+  instance:
+    ip-address: ${server.address}
+    instance-id: ${server.address}:${server.port}
+    prefer-ip-address: true
+    metadataMap:
+     management.port: ${management.server.port}
+  client:
+    serviceUrl:
+      defaultZone: http://191.168.101.23:8761/eureka
+
