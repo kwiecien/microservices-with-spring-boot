@@ -14,6 +14,11 @@ spring:
       discovery:
         enabled: true
         service-id: config
+  rabbitmq:
+    host: 191.168.101.23
+    port: 5672
+    username: guest
+    password: guest
 
 management:
   endpoints:
