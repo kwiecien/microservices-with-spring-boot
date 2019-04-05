@@ -1,9 +1,8 @@
 package at.iteratec.sample;
 
-import io.swagger.models.auth.In;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -11,9 +10,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api")
+@RefreshScope
 public class CalculatorController {
     private final LoggingService logger;
     private static final String NAME = "kk";
+
+    @Value("${radix}")
+    private int radix;
 
     @Autowired
     public CalculatorController(LoggingService logger) {
@@ -21,26 +24,26 @@ public class CalculatorController {
     }
 
     @GetMapping("/add")
-    public String add(@RequestParam int o1, @RequestParam int o2) {
+    public String add(@RequestParam String o1, @RequestParam String o2) {
         logger.log(NAME, o1 + " + " + o2);
-        return Integer.toString(o1 + o2);
+        return Integer.toString(Integer.parseInt(o1, radix) + Integer.parseInt(o2, radix), radix);
     }
 
     @GetMapping("/sub")
-    public String subtract(@RequestParam int o1, @RequestParam int o2) {
+    public String subtract(@RequestParam String o1, @RequestParam String o2) {
         logger.log(NAME, o1 + " - " + o2);
-        return Integer.toString(o1 - o2);
+        return Integer.toString(Integer.parseInt(o1, radix) - Integer.parseInt(o2, radix), radix);
     }
 
     @GetMapping("/mult")
-    public String multiply(@RequestParam int o1, @RequestParam int o2) {
+    public String multiply(@RequestParam String o1, @RequestParam String o2) {
         logger.log(NAME, o1 + " * " + o2);
-        return Integer.toString(o1 * o2);
+        return Integer.toString(Integer.parseInt(o1, radix) * Integer.parseInt(o2, radix), radix);
     }
 
     @GetMapping("/div")
-    public String divide(@RequestParam int o1, @RequestParam int o2) {
+    public String divide(@RequestParam String o1, @RequestParam String o2) {
         logger.log(NAME, o1 + " / " + o2);
-        return Double.toString(o1 * 1.0 / o2);
+        return Integer.toString(Integer.parseInt(o1, radix) / Integer.parseInt(o2, radix), radix);
     }
 }
